@@ -4,6 +4,7 @@
 #include <vector>
 #include <cmath>
 #include <iostream>
+#include <Eigen/Dense>
 
 struct Rectangle
 {
@@ -33,6 +34,7 @@ struct Robot
 // outside of all obstacles, return true.
 bool isValidPoint(double x, double y, const std::vector<Rectangle>& obstacles);
 
+bool checkCollision(std::vector<LineSegment>& square, std::vector<LineSegment>& obstacle);
 // Intersect a square with center at (x,y), orientation theta, and the given
 // side length with the set of rectangles. If the square lies outside of all
 // obstacles, return true. The hbound, and lbound are the dimentions of the environment. 
