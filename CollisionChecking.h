@@ -5,6 +5,7 @@
 #include <cmath>
 #include <iostream>
 #include <Eigen/Dense>
+#include "LineSegment.h"
 
 struct Rectangle
 {
