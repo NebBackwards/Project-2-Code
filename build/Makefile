@@ -214,30 +214,6 @@ LineSegment.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MY_LIBRARY.dir/build.make CMakeFiles/MY_LIBRARY.dir/LineSegment.cpp.s
 .PHONY : LineSegment.cpp.s
 
-RTP.o: RTP.cpp.o
-.PHONY : RTP.o
-
-# target to build an object file
-RTP.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MY_LIBRARY.dir/build.make CMakeFiles/MY_LIBRARY.dir/RTP.cpp.o
-.PHONY : RTP.cpp.o
-
-RTP.i: RTP.cpp.i
-.PHONY : RTP.i
-
-# target to preprocess a source file
-RTP.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MY_LIBRARY.dir/build.make CMakeFiles/MY_LIBRARY.dir/RTP.cpp.i
-.PHONY : RTP.cpp.i
-
-RTP.s: RTP.cpp.s
-.PHONY : RTP.s
-
-# target to generate assembly for a file
-RTP.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MY_LIBRARY.dir/build.make CMakeFiles/MY_LIBRARY.dir/RTP.cpp.s
-.PHONY : RTP.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -257,9 +233,6 @@ help:
 	@echo "... LineSegment.o"
 	@echo "... LineSegment.i"
 	@echo "... LineSegment.s"
-	@echo "... RTP.o"
-	@echo "... RTP.i"
-	@echo "... RTP.s"
 .PHONY : help
 
 

@@ -7,7 +7,7 @@ Rectangle ob3 = Rectangle{3.5, 2.0, 0.5, 1.0};
 std::vector<Rectangle> obstacles = {ob1, ob2, ob3};
 
 int main (){
-    if(isValidSquare(2.0, 1.19, M_PI/2.0, 0.5, obstacles, 5.0, 5.0)){
+    if(isValidSquare(1.5, 1.2, -M_PI/8.0, 1.0, obstacles, 5.0, 5.0)){
         std::cout << "Valid Square\n";
     }else{ std::cout << "Invalid Square\n";}
 }
