@@ -49,4 +49,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/MY_LIBRARY.dir/DependInfo.cmake"
   "CMakeFiles/planRTP.dir/DependInfo.cmake"
+  "CMakeFiles/testCollision.dir/DependInfo.cmake"
   )

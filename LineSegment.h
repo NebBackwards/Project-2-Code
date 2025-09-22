@@ -1,4 +1,7 @@
+#ifndef LINE_SEGMENT_H_
+#define LINE_SEGMENT_H_
 #include <Eigen/Dense>
+#include <Eigen/Geometry>
 
 class LineSegment {
 public:
@@ -9,9 +12,9 @@ public:
     LineSegment(const Vector2d& pointA, const Vector2d& pointB);
 
     // Getters
-    const Vector2d& getStartPoint() const;
-    const Vector2d& getEndPoint() const;
-    const Hyperplane2d& getLine() const;
+    Vector2d& getStartPoint();
+    Vector2d& getEndPoint();
+    Hyperplane2d& getLine();
     double getMaxX();
     double getMaxY();
     double getMinX();
@@ -27,3 +30,5 @@ private:
     double maxY;
     double minY;
 };
+
+#endif

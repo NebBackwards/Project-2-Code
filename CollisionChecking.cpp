@@ -5,7 +5,10 @@
 // Date: FILL ME OUT!!
 //////////////////////////////////////
 #include <Eigen/Dense>
+#include <Eigen/Geometry>
 #include "CollisionChecking.h"
+
+typedef Eigen::Transform<double, 2, Eigen::AffineCompact> SE2;
 
 bool isValidPoint(double x, double y, const std::vector<Rectangle>& obstacles)
 {
@@ -74,9 +77,9 @@ bool isValidSquare(double x, double y, double theta, double sideLength, const st
     //Create transformation matrix from base frame to square frame
     Eigen::Rotation2D<double> rotation(theta);
     Eigen::Vector2d translation(x,y);
-    Eigen::SE2 transform = SE2::Identity();
-    Eigen::transform.rotate(rotation);
-    Eigen::transform.translate(translation);
+    SE2 transform = SE2::Identity();
+    transform.rotate(rotation);
+    transform.translate(translation);
     //if centerpoint is within an obstacle, don't bother checking side intersections, square is invalid
     if (isValidPoint(x,y,obstacles)){
         //check all obstacles
@@ -86,7 +89,7 @@ bool isValidSquare(double x, double y, double theta, double sideLength, const st
             double max_y = ob.y + ob.height;
             Eigen::Vector2d p1(ob.x,ob.y);
             Eigen::Vector2d p2(max_x, ob.y);
-            Eigen::Vector2d p3(max_x,y, max_y);
+            Eigen::Vector2d p3(max_x, max_y);
             Eigen::Vector2d p4(ob.x,max_y);
             //transform points to square frame
             p1 = transform*p1;

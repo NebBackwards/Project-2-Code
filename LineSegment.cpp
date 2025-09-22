@@ -1,4 +1,4 @@
-#include <LineSegment.h>
+#include "LineSegment.h"
 
 LineSegment::LineSegment(const Vector2d& pointA, const Vector2d& pointB)
     : startPoint(pointA), endPoint(pointB)
@@ -23,19 +23,15 @@ LineSegment::LineSegment(const Vector2d& pointA, const Vector2d& pointB)
     }
 }
 
-const LineSegment::Vector2d& LineSegment::getStartPoint() const {
+LineSegment::Vector2d& LineSegment::getStartPoint() {
     return startPoint;
 }
 
-const LineSegment::Vector2d& LineSegment::getStartPoint() const {
-    return startPoint;
-}
-
-const LineSegment::Vector2d& LineSegment::getEndPoint() const {
+LineSegment::Vector2d& LineSegment::getEndPoint() {
     return endPoint;
 }
 
-const LineSegment::Hyperplane2d& LineSegment::getLine() const {
+LineSegment::Hyperplane2d& LineSegment::getLine() {
     return line;
 }
 

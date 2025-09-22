@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/MY_LIBRARY.dir/CollisionChecking.cpp.o"
   "CMakeFiles/MY_LIBRARY.dir/CollisionChecking.cpp.o.d"
+  "CMakeFiles/MY_LIBRARY.dir/LineSegment.cpp.o"
+  "CMakeFiles/MY_LIBRARY.dir/LineSegment.cpp.o.d"
   "CMakeFiles/MY_LIBRARY.dir/RTP.cpp.o"
   "CMakeFiles/MY_LIBRARY.dir/RTP.cpp.o.d"
   "libMY_LIBRARY.a"
