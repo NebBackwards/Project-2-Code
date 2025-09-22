@@ -130,19 +130,6 @@ MY_LIBRARY/fast:
 .PHONY : MY_LIBRARY/fast
 
 #=============================================================================
-# Target rules for targets named planRTP
-
-# Build rule for target.
-planRTP: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 planRTP
-.PHONY : planRTP
-
-# fast build rule for target.
-planRTP/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/planRTP.dir/build.make CMakeFiles/planRTP.dir/build
-.PHONY : planRTP/fast
-
-#=============================================================================
 # Target rules for targets named testCollision
 
 # Build rule for target.
@@ -227,30 +214,6 @@ LineSegment.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MY_LIBRARY.dir/build.make CMakeFiles/MY_LIBRARY.dir/LineSegment.cpp.s
 .PHONY : LineSegment.cpp.s
 
-PlanningRTP.o: PlanningRTP.cpp.o
-.PHONY : PlanningRTP.o
-
-# target to build an object file
-PlanningRTP.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/planRTP.dir/build.make CMakeFiles/planRTP.dir/PlanningRTP.cpp.o
-.PHONY : PlanningRTP.cpp.o
-
-PlanningRTP.i: PlanningRTP.cpp.i
-.PHONY : PlanningRTP.i
-
-# target to preprocess a source file
-PlanningRTP.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/planRTP.dir/build.make CMakeFiles/planRTP.dir/PlanningRTP.cpp.i
-.PHONY : PlanningRTP.cpp.i
-
-PlanningRTP.s: PlanningRTP.cpp.s
-.PHONY : PlanningRTP.s
-
-# target to generate assembly for a file
-PlanningRTP.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/planRTP.dir/build.make CMakeFiles/planRTP.dir/PlanningRTP.cpp.s
-.PHONY : PlanningRTP.cpp.s
-
 RTP.o: RTP.cpp.o
 .PHONY : RTP.o
 
@@ -284,7 +247,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... MY_LIBRARY"
-	@echo "... planRTP"
 	@echo "... testCollision"
 	@echo "... CollisionChecking.o"
 	@echo "... CollisionChecking.i"
@@ -295,9 +257,6 @@ help:
 	@echo "... LineSegment.o"
 	@echo "... LineSegment.i"
 	@echo "... LineSegment.s"
-	@echo "... PlanningRTP.o"
-	@echo "... PlanningRTP.i"
-	@echo "... PlanningRTP.s"
 	@echo "... RTP.o"
 	@echo "... RTP.i"
 	@echo "... RTP.s"

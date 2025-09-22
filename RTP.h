@@ -20,18 +20,18 @@ namespace ompl
             void setGoalBias(const double goal_bias) { goal_bias_ = goal_bias; }
             double getGoalBias() const { return goal_bias_;  }
 
-        protected:
+        //protected:
             class Node
             {
-                Node() = default;
-                Node(const base::StateInformationPtr& si) 
+                public:
+                    base::State* state{nullptr};
+                    Node* parent{nullptr};
+                    Node() = default;
+                    Node(const base::SpaceInformationPtr& si) 
                     : state(si->allocState())
-                {}
+                    {}
 
-                ~Node() = default;
-
-                base::State* state{nullptr};
-                Node* parent{nullptr};
+                    ~Node() = default;
             };
 
             base::StateSamplerPtr sampler_;

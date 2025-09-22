@@ -7,12 +7,15 @@ find_package(ompl REQUIRED)
 
 include_directories(${OMPL_INCLUDE_DIRS})
 
+find_package(Eigen3 REQUIRED)
+include_directories(${EIGEN3_INCLUDE_DIRS})
 # include RTP.cpp, CollisionChecking.cpp as a library
-add_library(MY_LIBRARY CollisionChecking.cpp RTP.cpp LineSegment.cpp)
+add_library(MY_LIBRARY CollisionChecking.cpp LineSegment.cpp RTP.cpp)
 link_libraries(MY_LIBRARY ${OMPL_LIBRARIES})
-
-add_executable(planRTP PlanningRTP.cpp)
-target_link_libraries(planRTP MY_LIBRARY  ${OMPL_LIBRARIES})
 
 add_executable(testCollision CollisionTest.cpp)
 target_link_libraries(testCollision MY_LIBRARY  ${OMPL_LIBRARIES})
+
+#add_executable(planRTP PlanningRTP.cpp)
+#target_link_libraries(planRTP MY_LIBRARY  ${OMPL_LIBRARIES})
+

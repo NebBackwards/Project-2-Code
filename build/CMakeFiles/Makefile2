@@ -64,7 +64,6 @@ CMAKE_BINARY_DIR = /code/build
 
 # The main recursive "all" target.
 all: CMakeFiles/MY_LIBRARY.dir/all
-all: CMakeFiles/planRTP.dir/all
 all: CMakeFiles/testCollision.dir/all
 .PHONY : all
 
@@ -74,7 +73,6 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/MY_LIBRARY.dir/clean
-clean: CMakeFiles/planRTP.dir/clean
 clean: CMakeFiles/testCollision.dir/clean
 .PHONY : clean
 
@@ -105,39 +103,13 @@ CMakeFiles/MY_LIBRARY.dir/clean:
 .PHONY : CMakeFiles/MY_LIBRARY.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/planRTP.dir
-
-# All Build rule for target.
-CMakeFiles/planRTP.dir/all: CMakeFiles/MY_LIBRARY.dir/all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/planRTP.dir/build.make CMakeFiles/planRTP.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/planRTP.dir/build.make CMakeFiles/planRTP.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/code/build/CMakeFiles --progress-num=5,6 "Built target planRTP"
-.PHONY : CMakeFiles/planRTP.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/planRTP.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /code/build/CMakeFiles 6
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/planRTP.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /code/build/CMakeFiles 0
-.PHONY : CMakeFiles/planRTP.dir/rule
-
-# Convenience name for target.
-planRTP: CMakeFiles/planRTP.dir/rule
-.PHONY : planRTP
-
-# clean rule for target.
-CMakeFiles/planRTP.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/planRTP.dir/build.make CMakeFiles/planRTP.dir/clean
-.PHONY : CMakeFiles/planRTP.dir/clean
-
-#=============================================================================
 # Target rules for target CMakeFiles/testCollision.dir
 
 # All Build rule for target.
 CMakeFiles/testCollision.dir/all: CMakeFiles/MY_LIBRARY.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/testCollision.dir/build.make CMakeFiles/testCollision.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/testCollision.dir/build.make CMakeFiles/testCollision.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/code/build/CMakeFiles --progress-num=7,8 "Built target testCollision"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/code/build/CMakeFiles --progress-num=5,6 "Built target testCollision"
 .PHONY : CMakeFiles/testCollision.dir/all
 
 # Build rule for subdir invocation for target.
