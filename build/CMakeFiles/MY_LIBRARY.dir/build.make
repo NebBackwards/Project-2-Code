@@ -97,19 +97,35 @@ CMakeFiles/MY_LIBRARY.dir/LineSegment.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MY_LIBRARY.dir/LineSegment.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /code/LineSegment.cpp -o CMakeFiles/MY_LIBRARY.dir/LineSegment.cpp.s
 
+CMakeFiles/MY_LIBRARY.dir/RTP.cpp.o: CMakeFiles/MY_LIBRARY.dir/flags.make
+CMakeFiles/MY_LIBRARY.dir/RTP.cpp.o: ../RTP.cpp
+CMakeFiles/MY_LIBRARY.dir/RTP.cpp.o: CMakeFiles/MY_LIBRARY.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/code/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/MY_LIBRARY.dir/RTP.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MY_LIBRARY.dir/RTP.cpp.o -MF CMakeFiles/MY_LIBRARY.dir/RTP.cpp.o.d -o CMakeFiles/MY_LIBRARY.dir/RTP.cpp.o -c /code/RTP.cpp
+
+CMakeFiles/MY_LIBRARY.dir/RTP.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MY_LIBRARY.dir/RTP.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /code/RTP.cpp > CMakeFiles/MY_LIBRARY.dir/RTP.cpp.i
+
+CMakeFiles/MY_LIBRARY.dir/RTP.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MY_LIBRARY.dir/RTP.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /code/RTP.cpp -o CMakeFiles/MY_LIBRARY.dir/RTP.cpp.s
+
 # Object files for target MY_LIBRARY
 MY_LIBRARY_OBJECTS = \
 "CMakeFiles/MY_LIBRARY.dir/CollisionChecking.cpp.o" \
-"CMakeFiles/MY_LIBRARY.dir/LineSegment.cpp.o"
+"CMakeFiles/MY_LIBRARY.dir/LineSegment.cpp.o" \
+"CMakeFiles/MY_LIBRARY.dir/RTP.cpp.o"
 
 # External object files for target MY_LIBRARY
 MY_LIBRARY_EXTERNAL_OBJECTS =
 
 libMY_LIBRARY.a: CMakeFiles/MY_LIBRARY.dir/CollisionChecking.cpp.o
 libMY_LIBRARY.a: CMakeFiles/MY_LIBRARY.dir/LineSegment.cpp.o
+libMY_LIBRARY.a: CMakeFiles/MY_LIBRARY.dir/RTP.cpp.o
 libMY_LIBRARY.a: CMakeFiles/MY_LIBRARY.dir/build.make
 libMY_LIBRARY.a: CMakeFiles/MY_LIBRARY.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/code/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library libMY_LIBRARY.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/code/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX static library libMY_LIBRARY.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/MY_LIBRARY.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/MY_LIBRARY.dir/link.txt --verbose=$(VERBOSE)
 
