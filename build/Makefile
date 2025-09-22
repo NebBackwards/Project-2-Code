@@ -142,6 +142,19 @@ planRTP/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/planRTP.dir/build.make CMakeFiles/planRTP.dir/build
 .PHONY : planRTP/fast
 
+#=============================================================================
+# Target rules for targets named testCollision
+
+# Build rule for target.
+testCollision: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 testCollision
+.PHONY : testCollision
+
+# fast build rule for target.
+testCollision/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testCollision.dir/build.make CMakeFiles/testCollision.dir/build
+.PHONY : testCollision/fast
+
 CollisionChecking.o: CollisionChecking.cpp.o
 .PHONY : CollisionChecking.o
 
@@ -165,6 +178,54 @@ CollisionChecking.s: CollisionChecking.cpp.s
 CollisionChecking.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MY_LIBRARY.dir/build.make CMakeFiles/MY_LIBRARY.dir/CollisionChecking.cpp.s
 .PHONY : CollisionChecking.cpp.s
+
+CollisionTest.o: CollisionTest.cpp.o
+.PHONY : CollisionTest.o
+
+# target to build an object file
+CollisionTest.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testCollision.dir/build.make CMakeFiles/testCollision.dir/CollisionTest.cpp.o
+.PHONY : CollisionTest.cpp.o
+
+CollisionTest.i: CollisionTest.cpp.i
+.PHONY : CollisionTest.i
+
+# target to preprocess a source file
+CollisionTest.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testCollision.dir/build.make CMakeFiles/testCollision.dir/CollisionTest.cpp.i
+.PHONY : CollisionTest.cpp.i
+
+CollisionTest.s: CollisionTest.cpp.s
+.PHONY : CollisionTest.s
+
+# target to generate assembly for a file
+CollisionTest.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testCollision.dir/build.make CMakeFiles/testCollision.dir/CollisionTest.cpp.s
+.PHONY : CollisionTest.cpp.s
+
+LineSegment.o: LineSegment.cpp.o
+.PHONY : LineSegment.o
+
+# target to build an object file
+LineSegment.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MY_LIBRARY.dir/build.make CMakeFiles/MY_LIBRARY.dir/LineSegment.cpp.o
+.PHONY : LineSegment.cpp.o
+
+LineSegment.i: LineSegment.cpp.i
+.PHONY : LineSegment.i
+
+# target to preprocess a source file
+LineSegment.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MY_LIBRARY.dir/build.make CMakeFiles/MY_LIBRARY.dir/LineSegment.cpp.i
+.PHONY : LineSegment.cpp.i
+
+LineSegment.s: LineSegment.cpp.s
+.PHONY : LineSegment.s
+
+# target to generate assembly for a file
+LineSegment.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MY_LIBRARY.dir/build.make CMakeFiles/MY_LIBRARY.dir/LineSegment.cpp.s
+.PHONY : LineSegment.cpp.s
 
 PlanningRTP.o: PlanningRTP.cpp.o
 .PHONY : PlanningRTP.o
@@ -224,9 +285,16 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... MY_LIBRARY"
 	@echo "... planRTP"
+	@echo "... testCollision"
 	@echo "... CollisionChecking.o"
 	@echo "... CollisionChecking.i"
 	@echo "... CollisionChecking.s"
+	@echo "... CollisionTest.o"
+	@echo "... CollisionTest.i"
+	@echo "... CollisionTest.s"
+	@echo "... LineSegment.o"
+	@echo "... LineSegment.i"
+	@echo "... LineSegment.s"
 	@echo "... PlanningRTP.o"
 	@echo "... PlanningRTP.i"
 	@echo "... PlanningRTP.s"
