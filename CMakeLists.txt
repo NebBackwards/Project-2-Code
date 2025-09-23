@@ -16,6 +16,6 @@ link_libraries(MY_LIBRARY ${OMPL_LIBRARIES})
 add_executable(testCollision CollisionTest.cpp)
 target_link_libraries(testCollision MY_LIBRARY  ${OMPL_LIBRARIES})
 
-#add_executable(planRTP PlanningRTP.cpp)
-#target_link_libraries(planRTP MY_LIBRARY  ${OMPL_LIBRARIES})
+add_executable(planRTP PlanningRTP.cpp)
+target_link_libraries(planRTP MY_LIBRARY  ${OMPL_LIBRARIES})
 

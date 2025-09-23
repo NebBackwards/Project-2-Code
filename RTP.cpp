@@ -1,8 +1,9 @@
 #include "RTP.h"
+#include "ompl/base/goals/GoalSampleableRegion.h"
 #include <limits>
 
 ompl::geometric::RTP::RTP(const base::SpaceInformationPtr& si)
-    : ompl::base::Planner(si, "RTP")
+    : base::Planner(si, "RTP")
 {
     specs_.approximateSolutions = true;
     specs_.directed = true;
@@ -28,12 +29,12 @@ ompl::base::PlannerStatus ompl::geometric::RTP::solve(
         sampler_ = si_->allocStateSampler();
 
     // Set up initial states
-    ompl::base::Goal* goal = pdef_->getGoal().get();
-    ompl::base::State* goal_state = pdef_->getGoal()->as<ompl::base::goals::GoalState>()->getState();
-    ompl::base::State* start_state = pis_.nextStart();
+    base::Goal* goal = pdef_->getGoal().get();
+    auto* goal_region = dynamic_cast<base::GoalSampleableRegion*>(goal);
+    const base::State* start_state = pis_.nextStart();
     if (start_state == nullptr)
-        return ompl::base::PlannerStatus::INVALID_START;
-    ompl::base::State* new_state = si_->allocState();
+        return base::PlannerStatus::INVALID_START;
+    base::State* new_state = si_->allocState();
 
     bool solved = false;
     double best_distance = std::numeric_limits<double>::infinity();
@@ -52,7 +53,7 @@ ompl::base::PlannerStatus ompl::geometric::RTP::solve(
         if (rng_.uniform01() > goal_bias_)
             sampler_->sampleUniform(new_state);
         else
-            si_->copyState(new_state, goal_state);
+            goal_region->sampleGoal(new_state);
 
         // Step 3: Check whether the straight line path is valid, and add to Tree
         if (si_->checkMotion(new_parent->state, new_state))
@@ -107,12 +108,12 @@ ompl::base::PlannerStatus ompl::geometric::RTP::solve(
 
 }
 
-void ompl::geometric::RTP::getPlannerData(ompl::base::PlannerData& data) const 
+void ompl::geometric::RTP::getPlannerData(base::PlannerData& data) const 
 {
     Planner::getPlannerData(data);
 
     if (best_node_ != nullptr)
-        data.addGoalVertex(ompl::base::PlannerDataVertex(best_node_->state));
+        data.addGoalVertex(base::PlannerDataVertex(best_node_->state));
     
     for (auto* node : node_list_)
     {
@@ -120,15 +121,15 @@ void ompl::geometric::RTP::getPlannerData(ompl::base::PlannerData& data) const
             data.addStartVertex(base::PlannerDataVertex(node->state));
         else
             data.addEdge(
-                ompl::base::PlannerDataVertex(node->parent->state), 
-                ompl::base::PlannerDataVertex(node->state)
+                base::PlannerDataVertex(node->parent->state), 
+                base::PlannerDataVertex(node->state)
             );
     }
 }
 
 void ompl::geometric::RTP::clear() 
 {
-    ompl::base::Planner::clear();
+    base::Planner::clear();
     sampler_.reset();
     for (auto &node : node_list_)
     {
@@ -136,6 +137,4 @@ void ompl::geometric::RTP::clear()
             si_->freeState(node->state);
         delete node;
     }
-    node_list_.clear();
-    best_node_ = nullptr;
 }

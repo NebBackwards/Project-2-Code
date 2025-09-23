@@ -1,9 +1,11 @@
 #include "CollisionChecking.h"
 #include "RTP.h"
+#include <fstream>
+#include <sstream>
 
 void planPoint(const std::vector<Rectangle> & obstacles )
 {
-    // TODO: Plan for a point robot in the plane. 
+    std::cout << obstacles[0].x;
 }
 
 void planBox(const std::vector<Rectangle> &  obstacles)
@@ -11,16 +13,30 @@ void planBox(const std::vector<Rectangle> &  obstacles)
     // TODO: Plan for a square_box that rotates and translates in the plane.
 }
 
+void makeEnvironment(std::vector<Rectangle>& obstacles, const std::string& filename)
+{
+    std::ifstream env_file(filename);
+    if (!env_file)
+        return;
+
+    std::string rect_str;
+    while (std::getline(env_file, rect_str))
+    {
+        std::istringstream iss(rect_str);
+        double x, y, width, height;
+        if (iss >> x >> y >> width >> height)
+            obstacles.push_back(Rectangle(x, y, width, height));
+    }
+}
+
 void makeEnvironment1(std::vector<Rectangle> &  obstacles )
 {
-
-    // TODO: Fill in the vector of rectangles with your second environment.
+    return makeEnvironment(obstacles, "obstacles1.txt");
 }
 
 void makeEnvironment2(std::vector<Rectangle> &  obstacles )
 {
-    // TODO: Fill in the vector of rectangles with your second environment.
-
+    return makeEnvironment(obstacles, "obstacles2.txt");
 }
 
 int main(int /* argc */, char ** /* argv */)

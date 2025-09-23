@@ -15,6 +15,10 @@ struct Rectangle
     double width;
     // The height (y-axis extent) of the rectangle
     double height;
+
+    Rectangle() = default;
+    Rectangle(double x, double y, double width, double height)
+        : x(x), y(y), width(width), height(height) {}
 };
 
 // Definition of our robot.

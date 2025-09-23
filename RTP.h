@@ -20,7 +20,7 @@ namespace ompl
             void setGoalBias(const double goal_bias) { goal_bias_ = goal_bias; }
             double getGoalBias() const { return goal_bias_;  }
 
-        //protected:
+        protected:
             class Node
             {
                 public:
