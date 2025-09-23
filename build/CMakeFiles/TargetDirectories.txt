@@ -1,4 +1,0 @@
-/code/build/CMakeFiles/MY_LIBRARY.dir
-/code/build/CMakeFiles/testCollision.dir
-/code/build/CMakeFiles/edit_cache.dir
-/code/build/CMakeFiles/rebuild_cache.dir
