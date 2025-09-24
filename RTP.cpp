@@ -50,10 +50,10 @@ ompl::base::PlannerStatus ompl::geometric::RTP::solve(
         Node* new_parent = node_list_[rng_.uniformInt(0,node_list_.size() - 1)];
 
         // Step 2: Sample a random configuration, q_b, from the configuration space
-        if (rng_.uniform01() > goal_bias_)
-            sampler_->sampleUniform(new_state);
-        else
+        if (goal_region != nullptr && rng_.uniform01() < goal_bias_ && goal_region->canSample())
             goal_region->sampleGoal(new_state);
+        else
+            sampler_->sampleUniform(new_state);
 
         // Step 3: Check whether the straight line path is valid, and add to Tree
         if (si_->checkMotion(new_parent->state, new_state))
@@ -137,4 +137,6 @@ void ompl::geometric::RTP::clear()
             si_->freeState(node->state);
         delete node;
     }
+    node_list_.clear();
+    best_node_ = nullptr;
 }

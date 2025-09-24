@@ -3,24 +3,12 @@
 LineSegment::LineSegment(const Vector2d& pointA, const Vector2d& pointB)
     : startPoint(pointA), endPoint(pointB)
 {
-    // Direction vector from A to B
-    // Initialize the hyperplane using the normal and one of the points
     line = Hyperplane2d::Through(startPoint, endPoint);
-    if (startPoint(0,0) >= endPoint(0,0)){
-        maxX = startPoint(0,0);
-        minX = endPoint(0,0);
-    }else{
-        maxX = endPoint(0,0);
-        minX = startPoint(0,0);
-    }
 
-    if (startPoint(1,0) >= endPoint(1,0)){
-        maxY = startPoint(1,0);
-        minY = endPoint(1,0);
-    }else{
-        maxY = endPoint(1,0);
-        minY = startPoint(1,0);
-    }
+    maxX = std::max(startPoint(0),endPoint(0));
+    maxY = std::max(startPoint(1),endPoint(1));
+    minX = std::min(startPoint(0),endPoint(0));
+    minY = std::min(startPoint(1),endPoint(1));
 }
 
 LineSegment::Vector2d& LineSegment::getStartPoint() {

@@ -8,6 +8,7 @@
 namespace ob = ompl::base;
 namespace og = ompl::geometric;
 std::vector<Rectangle> CurrentObstacles;
+std::string ObstacleFilename;
 
 bool isPointValid(const ob::State *state){
         // cast the abstract state type to the type we expect
@@ -31,7 +32,7 @@ void planPoint(const std::vector<Rectangle> & obstacles )
 
     // set the bounds for the R^2 part of SE(2)
     ob::RealVectorBounds bounds(2);
-    bounds.setLow(-5);
+    bounds.setLow(0);
     bounds.setHigh(5);
 
     space->setBounds(bounds);
@@ -63,9 +64,26 @@ void planPoint(const std::vector<Rectangle> & obstacles )
     if (solved)
     {
         std::cout << "Found solution:" << std::endl;
-        // print the path to screen
-        //ss.simplifySolution();
-        ss.getSolutionPath().print(std::cout);
+        //print the path to screen
+        ss.simplifySolution();
+        ss.getSolutionPath().printAsMatrix(std::cout);
+        if (ObstacleFilename == "obstacles1.txt"){
+            std::string filename = "Path1.txt";
+        }else{std::string filename = "Path2.txt";}
+        
+        std::ofstream outputFile;
+        //clear file
+        outputFile.open(filename, std::ofstream::out | std::ofstream::trunc);
+        outputFile.close();
+        //reopen and fill
+        outputFile.open(filename);
+        if (outputFile.is_open()) {
+
+            outputFile << "SE2 0.05" << std::endl;
+            outputFile << "0.6 0.36 0" << std::endl;
+            ss.getSolutionPath().printAsMatrix(outputFile);
+            outputFile.close();
+        } else {std::cerr << "Unable to open path file" << std::endl;}
     }
     else
         std::cout << "No solution found" << std::endl;
@@ -112,8 +130,26 @@ void planBox(const std::vector<Rectangle> &  obstacles)
     {
         std::cout << "Found solution:" << std::endl;
         // print the path to screen
-        //ss.simplifySolution();
-        ss.getSolutionPath().print(std::cout);
+        ss.simplifySolution();
+        ss.getSolutionPath().printAsMatrix(std::cout);
+        std::string filename = "";
+        if (ObstacleFilename == "obstacles1.txt"){
+            filename = "Path3.txt";
+        }else{std::string filename = "Path4.txt";}
+        
+        std::ofstream outputFile;
+        //clear file
+        outputFile.open(filename, std::ofstream::out | std::ofstream::trunc);
+        outputFile.close();
+        //reopen and fill
+        outputFile.open(filename);
+        if (outputFile.is_open()) {
+
+            outputFile << "SE2 0.05" << std::endl;
+            outputFile << "0.6 0.36 0" << std::endl;
+            ss.getSolutionPath().printAsMatrix(outputFile);
+            outputFile.close();
+        } else {std::cerr << "Unable to open path file" << std::endl;}
     }
     else
         std::cout << "No solution found" << std::endl;
@@ -135,6 +171,7 @@ void makeEnvironment(std::vector<Rectangle>& obstacles, const std::string& filen
             obstacles.push_back(Rectangle(x, y, width, height));
             CurrentObstacles.clear();
             CurrentObstacles = obstacles;
+            ObstacleFilename = filename
     }
 }
 
