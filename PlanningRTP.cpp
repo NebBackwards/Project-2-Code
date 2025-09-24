@@ -67,6 +67,7 @@ void planPoint(const std::vector<Rectangle> & obstacles )
         //print the path to screen
         ss.simplifySolution();
         ss.getSolutionPath().printAsMatrix(std::cout);
+        std::string filename = "";
         if (ObstacleFilename == "obstacles1.txt"){
             std::string filename = "Path1.txt";
         }else{std::string filename = "Path2.txt";}
@@ -145,7 +146,7 @@ void planBox(const std::vector<Rectangle> &  obstacles)
         outputFile.open(filename);
         if (outputFile.is_open()) {
 
-            outputFile << "SE2 0.05" << std::endl;
+            outputFile << "SE2 0.5" << std::endl;
             outputFile << "0.6 0.36 0" << std::endl;
             ss.getSolutionPath().printAsMatrix(outputFile);
             outputFile.close();
@@ -171,7 +172,7 @@ void makeEnvironment(std::vector<Rectangle>& obstacles, const std::string& filen
             obstacles.push_back(Rectangle(x, y, width, height));
             CurrentObstacles.clear();
             CurrentObstacles = obstacles;
-            ObstacleFilename = filename
+            ObstacleFilename = filename;
     }
 }
 
