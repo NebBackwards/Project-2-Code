@@ -91,6 +91,7 @@ int main(int argc, char **argv)
     b.addPlanner(std::make_shared<ompl::geometric::KPIECE1>(ss.getSpaceInformation()));
     b.addPlanner(std::make_shared<ompl::geometric::RRT>(ss.getSpaceInformation()));
     b.addPlanner(std::make_shared<ompl::geometric::PRM>(ss.getSpaceInformation()));
+    b.addPlanner(std::make_shared<ompl::geometric::RTP>(ss.getSpaceInformation()));
     b.benchmark(request);
     b.saveResultsToFile(boost::str(boost::format("kinematic_%i.log") % numLinks).c_str());
 

@@ -10,14 +10,17 @@
 
 typedef Eigen::Transform<double, 2, Eigen::AffineCompact> SE2;
 
-bool isValidPoint(double x, double y, const std::vector<Rectangle>& obstacles)
+bool isValidPoint(double x, double y, const std::vector<Rectangle> &obstacles)
 {
     bool isValid = true;
-    for (Rectangle ob : obstacles){
+    for (Rectangle ob : obstacles)
+    {
         double max_x = ob.x + ob.width;
         double max_y = ob.y + ob.height;
-        if ((x <= max_x) && (x >= ob.x)){
-            if ((y <= max_y) && (y >= ob.y)){
+        if ((x <= max_x) && (x >= ob.x))
+        {
+            if ((y <= max_y) && (y >= ob.y))
+            {
                 isValid = false;
             }
         }
@@ -25,42 +28,45 @@ bool isValidPoint(double x, double y, const std::vector<Rectangle>& obstacles)
     return isValid;
 }
 
-bool checkCollision (std::vector<LineSegment>& square, std::vector<LineSegment>& obstacle){
-    for (LineSegment side : square){
-        //against each side of the current obstacle
-        for(LineSegment ob_side : obstacle){
-            //find intersection point
+bool checkCollision(std::vector<LineSegment> &square, std::vector<LineSegment> &obstacle)
+{
+    for (LineSegment side : square)
+    {
+        // against each side of the current obstacle
+        for (LineSegment ob_side : obstacle)
+        {
+            // find intersection point
             Eigen::Vector2d intersection_point = side.getLine().intersection(ob_side.getLine());
             std::cout << "Intersection Point:\n";
-            std::cout << intersection_point <<std::endl;
-            printf("Max X Value: %f",ob_side.getMaxX());
-            printf("Min X Value: %f",ob_side.getMinX());
-            printf("Max Y Value: %f",ob_side.getMaxY());
-            printf("Min Y Value: %f",ob_side.getMinY());
-            //check if intersection point is within both line segments x & y bounds
-            if ((intersection_point(0,0) >= ob_side.getMinX())&&(intersection_point(0,0) <= ob_side.getMaxX())){
-                if ((intersection_point(1,0) >= ob_side.getMinY())&&(intersection_point(1,0) <= ob_side.getMaxY())){
-                    if ((intersection_point(0,0) >= side.getMinX())&&(intersection_point(0,0) <= side.getMaxX())){
-                        if ((intersection_point(1,0) >= side.getMinY())&&(intersection_point(1,0) <= side.getMaxY())){
-                            //if intersection point is on both line segments, line segments collide
+            std::cout << intersection_point << std::endl;
+            // check if intersection point is within both line segments x & y bounds
+            if ((intersection_point(0, 0) >= ob_side.getMinX()) && (intersection_point(0, 0) <= ob_side.getMaxX()))
+            {
+                if ((intersection_point(1, 0) >= ob_side.getMinY()) && (intersection_point(1, 0) <= ob_side.getMaxY()))
+                {
+                    if ((intersection_point(0, 0) >= side.getMinX()) && (intersection_point(0, 0) <= side.getMaxX()))
+                    {
+                        if ((intersection_point(1, 0) >= side.getMinY()) && (intersection_point(1, 0) <= side.getMaxY()))
+                        {
+                            // if intersection point is on both line segments, line segments collide
                             return true;
                         }
                     }
                 }
             }
-                    
         }
     }
-    //if no line segments collide, objects are not in collision
+    // if no line segments collide, objects are not in collision
     return false;
 }
 
-std::vector<LineSegment> vectorsToList(Eigen::Vector2d v1, Eigen::Vector2d v2, Eigen::Vector2d v3, Eigen::Vector2d v4){
+std::vector<LineSegment> vectorsToList(Eigen::Vector2d v1, Eigen::Vector2d v2, Eigen::Vector2d v3, Eigen::Vector2d v4)
+{
     LineSegment s1 = LineSegment(v1, v2);
     LineSegment s2 = LineSegment(v2, v3);
     LineSegment s3 = LineSegment(v3, v4);
     LineSegment s4 = LineSegment(v4, v1);
-    //create list of sides for later use
+    // create list of sides for later use
     std::vector<LineSegment> sides;
     sides.push_back(s1);
     sides.push_back(s2);
@@ -69,66 +75,63 @@ std::vector<LineSegment> vectorsToList(Eigen::Vector2d v1, Eigen::Vector2d v2, E
     return sides;
 }
 
-bool isValidSquare(double x, double y, double theta, double sideLength, const std::vector<Rectangle>& obstacles,double hbound, double lbound)
-{   
+bool isValidSquare(double x, double y, double theta, double sideLength, const std::vector<Rectangle> &obstacles, double hbound, double lbound)
+{
     std::cout << "Test\n";
-    double halfSide = sideLength/2.0;
-    //Assume (x,y) is center of square & refrence frame, find positions of vertices 
-    Eigen::Vector2d v1(-halfSide,-halfSide);
-    Eigen::Vector2d v2(halfSide,-halfSide);
-    Eigen::Vector2d v3(halfSide,halfSide);
-    Eigen::Vector2d v4(-halfSide,halfSide);
-    //Create transformation matrix from base frame to square frame
-    Eigen::Rotation2D<double> rotation(-theta);
-    Eigen::Vector2d translation(-x,-y);
+    double halfSide = sideLength / 2.0;
+    // Assume (x,y) is center of square & refrence frame, find positions of vertices
+    Eigen::Vector2d v1(-halfSide, -halfSide);
+    Eigen::Vector2d v2(halfSide, -halfSide);
+    Eigen::Vector2d v3(halfSide, halfSide);
+    Eigen::Vector2d v4(-halfSide, halfSide);
+    // Create transformation matrix from base frame to square frame
+    Eigen::Rotation2D<double> rotation(theta);
+    Eigen::Vector2d translation(x, y);
     SE2 transform = SE2::Identity();
     transform.rotate(rotation);
     transform.translate(translation);
-    transform = transform.inverse();
-    //transform points to base frame
-    v1 = transform*v1;
-    v2 = transform*v2;
-    v3 = transform*v3;
-    v4 = transform*v4;
-    std::cout << "Square Vertices\n";
-    printf("%f,%f \n",v1(0),v1(1));
-    printf("%f,%f \n",v2(0),v2(1));
-    printf("%f,%f \n",v3(0),v3(1));
-    printf("%f,%f \n",v4(0),v4(1));
-    //convert to list of line segments
-    std::vector<LineSegment> square = vectorsToList(v1,v2,v3,v4);
-    //if centerpoint is within an obstacle, don't bother checking side intersections, square is invalid
-    if (isValidPoint(x,y,obstacles)){
-        //check all obstacles
-        for (Rectangle ob : obstacles){
-            std::cout<<"obstacles\n";
-            //define points for a given obstacle
+    //transform = transform.inverse();
+    // transform points to base frame
+    // v1 = transform * v1;
+    // v2 = transform * v2;
+    // v3 = transform * v3;
+    // v4 = transform * v4;
+    // convert to list of line segments
+    std::vector<LineSegment> square = vectorsToList(v1, v2, v3, v4);
+    // if centerpoint is within an obstacle, don't bother checking side intersections, square is invalid
+    if (isValidPoint(x, y, obstacles)){
+        // check all obstacles
+        for (Rectangle ob : obstacles)
+        {
+            std::cout << "obstacles\n";
+            // define points for a given obstacle
             double max_x = ob.x + ob.width;
             double max_y = ob.y + ob.height;
-            Eigen::Vector2d p1(ob.x,ob.y);
+            Eigen::Vector2d p1(ob.x, ob.y);
             Eigen::Vector2d p2(max_x, ob.y);
             Eigen::Vector2d p3(max_x, max_y);
-            Eigen::Vector2d p4(ob.x,max_y);
-            std::cout << "Untransformed Obstacle Points\n";
-            printf("%f,%f \n",p1(0),p1(1));
-            printf("%f,%f \n",p2(0),p2(1));
-            printf("%f,%f \n",p3(0),p3(1));
-            printf("%f,%f \n",p4(0),p4(1));
-            //transform points to square frame
-            // p1 = transform*p1;
-            // p2 = transform*p2;
-            // p3 = transform*p3;
-            // p4 = transform*p4;
-            // std::cout << "Transformed Obstacle Points\n";
-            // printf("%f,%f \n",p1(0),p1(1));
-            // printf("%f,%f \n",p2(0),p2(1));
-            // printf("%f,%f \n",p3(0),p3(1));
-            // printf("%f,%f \n",p4(0),p4(1));
-            std::vector<LineSegment> obstacle = vectorsToList(p1,p2,p3,p4);
-            if(checkCollision(square, obstacle)){
+            Eigen::Vector2d p4(ob.x, max_y);
+            // transform points to square frame
+              p1 = transform*p1;
+              p2 = transform*p2;
+              p3 = transform*p3;
+              p4 = transform*p4;
+            //  std::cout << "Transformed Obstacle Points\n";
+            //  printf("%f,%f \n",p1(0),p1(1));
+            //  printf("%f,%f \n",p2(0),p2(1));
+            //  printf("%f,%f \n",p3(0),p3(1));
+            //  printf("%f,%f \n",p4(0),p4(1));
+            std::vector<LineSegment> obstacle = vectorsToList(p1, p2, p3, p4);
+            if (checkCollision(square, obstacle))
+            {
                 std::cout << "Returning False\n";
-                return false;}
-        } return true;
-    }else{return false;}
+                return false;
+            }
+        }
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
-
